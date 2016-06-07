@@ -110,6 +110,8 @@ GEM
       railties (= 4.2.6)
       sprockets-rails
     rails-assets-jquery (2.2.4)
+    rails-assets-jt.timepicker (1.11.1)
+      rails-assets-jquery (>= 1.7)
     rails-assets-materialize (0.97.6)
       rails-assets-jquery (>= 2.1.1)
     rails-deprecated_sanitizer (1.0.3)
@@ -181,6 +183,7 @@ DEPENDENCIES
   pg (~> 0.15)
   puma
   rails (= 4.2.6)
+  rails-assets-jt.timepicker!
   rails-assets-materialize!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

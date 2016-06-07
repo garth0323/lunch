@@ -18,8 +18,10 @@ gem 'faker'
 gem "gritter", "1.2.0"
 gem 'kaminari'
 
-
-gem 'rails-assets-materialize', source: 'https://rails-assets.org'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-jt.timepicker'
+  gem 'rails-assets-materialize'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

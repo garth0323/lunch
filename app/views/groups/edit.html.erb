@@ -1,0 +1,17 @@
+<div class='container'>
+  <h2>Who's coming to lunch?</h2>
+  <%= form_for @group, remote: true do |f| %>
+    <div class="field" >
+      <%= f.collection_check_boxes :user_ids, User.all, :id, :username do |b| %>
+        <span>
+          <%= b.check_box %>
+          <%= b.label %><br/>
+        </span>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Next", class: 'waves-effect waves-light btn' %>
+    </div>
+  <% end %>
+</div>

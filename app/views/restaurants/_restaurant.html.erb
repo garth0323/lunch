@@ -4,11 +4,11 @@
       <div class="col s6"><h4><%= @restaurant.name %></h4></div>
       <div class="col s6 valign">
         <%= link_to downvote_restaurant_path(@restaurant), method: :post, remote: true, class: "right" do %>
-           <i class="material-icons">thumb_down</i>
+           <i class="material-icons red-text">thumb_down</i>
         <% end %>
         <span class='right'>Rating: <%= total_votes(@restaurant) %></span>
         <%= link_to upvote_restaurant_path(@restaurant), method: :post, remote: true, class: "right" do %>
-           <i class="material-icons">thumb_up</i>
+           <i class="material-icons red-text">thumb_up</i>
         <% end %>
       </div>
     </div>    

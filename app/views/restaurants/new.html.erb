@@ -1,6 +1,6 @@
 <div class='container'>
   <h2>New Restaurant</h2>
-  <%= form_for @restaurant do |f| %>
+  <%= form_for @restaurant, remote: true do |f| %>
     <div class="field">
       <%= f.label :name %><br />
       <%= f.text_field :name, autofocus: true %>

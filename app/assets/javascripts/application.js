@@ -15,5 +15,11 @@
 //= require jquery_ujs
 //= require materialize
 //= require gritter
+//= require jt.timepicker
 //= require turbolinks
 //= require_tree .
+
+
+$( document ).ready(function() {
+  $('#timepicker').timepicker()
+});

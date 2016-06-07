@@ -1,0 +1,13 @@
+<div class='container'>
+  <h2>What time for lunch?</h2>
+  <%= form_for @group, remote: true do |f| %>
+    <div class="field" >
+      <%= f.label :time %><br />
+      <%= f.text_field :appointment, id: "timepicker" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Next", class: 'waves-effect waves-light btn' %>
+    </div>
+  <% end %>
+</div>
