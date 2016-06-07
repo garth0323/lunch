@@ -1,0 +1,35 @@
+<div class="section">
+  <div class="container">
+    <div class="row valign-wrapper">
+      <div class="col s8">
+        <h2 class="header">Restaurants</h2>
+      </div>
+      <div class="col s4">
+        <%= link_to new_restaurant_path, class: "btn-floating btn-large red right valign" do %>
+          <i class="material-icons">add</i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='container'>
+  <ul class="collapsible popout" data-collapsible="accordion">
+    <% @restaurants.each do |restaurant| %>
+      <li>
+        <div class="collapsible-header"><%= restaurant.name %>
+          <span class='right'>Rating: <%= total_votes(restaurant) %></span>
+        </div>
+        <div class="collapsible-body"><p><%= restaurant.description %></p>
+          <p><%= link_to "more...", restaurant_path(restaurant), class: 'waves-effect waves-light btn' %>
+            <span class='right'>Reviews: <%= restaurant.reviews.count %></span>
+          </p>
+
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <div class='white text-red center'>
+    <%= paginate @restaurants %>
+  </div>
+</div>

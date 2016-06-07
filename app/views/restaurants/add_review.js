@@ -1,0 +1,1 @@
+// $('#restaurant_and_reviews').html('<%= j(render partial: 'restaurant', locals: {restaurant: @restaurant})%>')

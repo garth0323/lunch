@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cool Kids Table</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<nav>
+  <div class="nav-wrapper">
+    <a href="" class="brand-logo center">Cool Kids Table</a>
+  </div>
+</nav>
+
+<%= js extend_gritter :position => "top_right" %>
+
+
+<% if flash[:notice] %>
+
+
+  <%= js add_gritter(flash[:notice], :image => :success, :nodom_wrap  => true) %>
+
+
+<% elsif flash[:error] %>
+
+
+  <%= js add_gritter(flash[:error], :image => :error, :title => "Error", :nodom_wrap  => true) %>
+
+
+<% end %>
+
+
+<%= yield %>
+
+</body>
+</html>

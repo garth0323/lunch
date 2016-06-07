@@ -1,0 +1,19 @@
+<div class='container'>
+  <h2>New Restaurant</h2>
+  <%= form_for @restaurant do |f| %>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :description %><br />
+      <%= f.text_area :description, class: "materialize-textarea" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Add", class: 'waves-effect waves-light btn' %>
+    </div>
+
+  <% end %>
+</div>

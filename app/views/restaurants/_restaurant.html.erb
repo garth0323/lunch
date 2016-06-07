@@ -1,0 +1,26 @@
+<ul class="collection with-header">
+  <li class="collection-header">
+    <div class="row valign-wrapper">
+      <div class="col s6"><h4><%= @restaurant.name %></h4></div>
+      <div class="col s6 valign">
+        <%= link_to downvote_restaurant_path(@restaurant), method: :post, remote: true, class: "right" do %>
+           <i class="material-icons">thumb_down</i>
+        <% end %>
+        <span class='right'>Rating: <%= total_votes(@restaurant) %></span>
+        <%= link_to upvote_restaurant_path(@restaurant), method: :post, remote: true, class: "right" do %>
+           <i class="material-icons">thumb_up</i>
+        <% end %>
+      </div>
+    </div>    
+  </li>
+  <% if @reviews.present? %>
+    <% @reviews.each do |review| %>
+      <li class="collection-item">
+        <%= review.content %><br/>
+        <%= "By: #{review.user.username}, #{distance_of_time_in_words(review.created_at, Time.now)} ago" %>
+      </li>
+    <% end %>
+  <% else %>
+    <li class="collection-item">Be the first to write a review!</li>
+  <% end %>
+</ul>
