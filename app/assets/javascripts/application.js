@@ -22,4 +22,6 @@
 
 $( document ).ready(function() {
   $('#timepicker').timepicker()
+  $('ul.tabs').tabs();
 });
+

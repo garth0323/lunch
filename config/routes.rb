@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :groups do
     member do
       get 'restaurant'
+      post 'choose_restaurant'
     end
   end
 

@@ -4,6 +4,10 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  def show
+    @group = Group.find params[:id]
+  end
+
   def create
     ActiveRecord::Base.transaction do
       @group = Group.create! group_params
@@ -31,7 +35,16 @@ class GroupsController < ApplicationController
 
   def restaurant
     @group = Group.find params[:id]
+    @all_upvoted = @group.all_upvoted_no_downvotes
+    @one_upvoted = @group.one_upvoted_no_downvotes
+    @no_veto = @group.no_downvotes
+  end
 
+  def choose_restaurant
+    @group = Group.find params[:id]
+    restaurant = Restaurant.find params[:restaurant]
+    @group.update restaurant: restaurant
+    redirect_via_turbolinks_to group_path(@group)
   end
 
   private
