@@ -1,15 +1,35 @@
 <div class='container'>
+  <h2>All the Info</h2>
   <div class="row">
     <div class="col s12 m12">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title"><%= @group.restaurant.name %></span>
           <p><%= @group.restaurant.description %></p>
-          <p><%= @group.appointment %></p>
+          <p class='right'>Lunch Time: <%= local_time(@group.appointment) %></p>
+          <table class="bordered centered">
+            <thead>
+              <tr>
+                <th data-field="name">Username</th>
+                <th data-field="price">Accepted Invitation?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @group.users.each do |user| %>
+                <tr>
+                  <td><%= user.username %></td>
+                  <td>
+                    <% if invite_accepted? @group, user %>
+                      <i class="tiny material-icons">done</i>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
         <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href="#">This is a link</a>
+          <%= link_to 'Accept Invitation', accept_invitation_group_path, method: :post, remote: true unless invite_accepted? @group, current_user %>
         </div>
       </div>
     </div>

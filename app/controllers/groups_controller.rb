@@ -27,9 +27,13 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.find params[:id]
-    group_params[:user_ids].each do |id|
-      @group.memberships.create(user_id: id)
+    ids = group_params[:user_ids].reject &:blank?
+    ids.each do |id|
+      user = User.find id
+      @group.memberships.create(user: user)
     end
+    byebug
+    Membership.where(group: @group, user: current_user).first.update!(accepted: true)
     redirect_via_turbolinks_to restaurant_group_path(@group)
   end
 
@@ -44,6 +48,15 @@ class GroupsController < ApplicationController
     @group = Group.find params[:id]
     restaurant = Restaurant.find params[:restaurant]
     @group.update restaurant: restaurant
+    @group.users.each do |user|
+      InviteMailer.invite_email(user, @group).deliver! unless user == current_user
+    end
+    redirect_via_turbolinks_to group_path(@group)
+  end
+
+  def accept_invitation
+    @group = Group.find params[:id]
+    Membership.where(group: @group, user: current_user).first.update!(accepted: true)
     redirect_via_turbolinks_to group_path(@group)
   end
 

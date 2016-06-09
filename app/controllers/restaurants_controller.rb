@@ -1,16 +1,25 @@
 class RestaurantsController < ApplicationController
+  before_filter :authenticate_user!
+  before_action :find_restaurant, except: [:create, :new, :index]
 
   def index
     @restaurants = Restaurant.page(params[:page]).per(10)
   end
 
   def show
-    @restaurant = Restaurant.find params[:id]
     @reviews = @restaurant.reviews.order('created_at DESC')
   end
 
   def new
     @restaurant = Restaurant.new
+  end
+
+  def edit
+  end
+
+  def update
+    @restaurant.update restaurant_params
+    redirect_via_turbolinks_to restaurant_path(@restaurant)
   end
 
   def create
@@ -23,7 +32,6 @@ class RestaurantsController < ApplicationController
   end
 
   def upvote
-    @restaurant = Restaurant.find params[:id]
     if current_user.up_votes.find_by(restaurant: @restaurant).present?
       flash[:error] = "You can only up vote once!"
     else
@@ -34,7 +42,6 @@ class RestaurantsController < ApplicationController
   end
 
   def downvote
-    @restaurant = Restaurant.find params[:id]
     if current_user.down_votes.find_by(restaurant: @restaurant).present?
       flash[:error] = "You can only down vote once!"
     else
@@ -45,7 +52,6 @@ class RestaurantsController < ApplicationController
   end
 
   def add_review
-    @restaurant = Restaurant.find params[:id]
     @review = @restaurant.reviews.new review_params
     @review.user = current_user
     if @review.save!
@@ -64,6 +70,10 @@ class RestaurantsController < ApplicationController
 
   def review_params
     params.require(:review).permit(:content)
+  end
+
+  def find_restaurant
+    @restaurant = Restaurant.find params[:id]
   end
 
 end

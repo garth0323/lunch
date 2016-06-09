@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     member do
       get 'restaurant'
       post 'choose_restaurant'
+      post 'accept_invitation'
     end
   end
 
