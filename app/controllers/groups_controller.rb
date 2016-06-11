@@ -52,7 +52,7 @@ class GroupsController < ApplicationController
     @group.update restaurant: restaurant
     @group.users.each do |user|
       Membership.where(group: @group, user: user).first.update!(accepted: false) unless user == current_user
-      InviteMailer.invite_email(user, @group).deliver! unless user == current_user
+      InviteMailer.invite_email(user, @group).deliver_now! unless user == current_user
     end
     redirect_via_turbolinks_to group_path(@group)
   end
