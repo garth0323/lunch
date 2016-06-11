@@ -39,7 +39,7 @@ class Group < ActiveRecord::Base
     users.each do |user|
       result << user.up_votes.pluck(:id)
     end
-    result.uniq!
+    result.uniq
   end
 
   def all_downvotes_of_group
@@ -47,7 +47,7 @@ class Group < ActiveRecord::Base
     users.each do |user|
       result << user.down_votes.pluck(:id)
     end
-    result.uniq!
+    result.uniq
   end
 
 end
