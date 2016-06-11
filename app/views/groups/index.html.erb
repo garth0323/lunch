@@ -1,13 +1,41 @@
 <div class='container'>
-  <h2>What time for lunch?</h2>
-  <%= form_for @group, remote: true do |f| %>
-    <div class="field" >
-      <%= f.label :time %><br />
-      <%= f.text_field :appointment, id: "timepicker" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Next", class: 'waves-effect waves-light btn' %>
-    </div>
-  <% end %>
+  <h2>All your Lunches</h2>
+  <ul class="collapsible popout" data-collapsible="accordion">
+    <% @groups.each do |group| %>
+      <% if complete_invite group %>
+        <li>
+          <div class="collapsible-header"><%= group.restaurant.name %>
+            <span class='right'>Lunch Time: <%= local_time(group.appointment) %></span>
+          </div>
+          <div class="collapsible-body">
+            <p>Invitees:</p>
+            <table class="bordered centered">
+              <thead>
+                <tr>
+                  <th data-field="name">Username</th>
+                  <th data-field="price">Accepted Invitation?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% group.users.each do |user| %>
+                  <tr>
+                    <td><%= user.username %></td>
+                    <td>
+                      <% if invite_accepted? group, user %>
+                        <i class="tiny material-icons">done</i>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <p><%= link_to "Change invitees", edit_group_path(group), class: 'waves-effect waves-light btn' %>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <div class='white text-red center'>
+    <%= paginate @groups %>
+  </div>
 </div>

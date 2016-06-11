@@ -28,9 +28,11 @@
             </tbody>
           </table>
         </div>
-        <div class="card-action">
-          <%= link_to 'Accept Invitation', accept_invitation_group_path, method: :post, remote: true unless invite_accepted? @group, current_user %>
-        </div>
+        <% unless invite_accepted? @group, current_user %>
+          <div class="card-action">
+            <%= link_to 'Accept Invitation', accept_invitation_group_path, method: :post, remote: true %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

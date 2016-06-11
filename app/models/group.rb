@@ -1,7 +1,9 @@
 class Group < ActiveRecord::Base
   has_many :memberships
-  has_many :users, through: :memberships
+  has_many :users, -> { uniq }, through: :memberships
   belongs_to :restaurant
+
+   scope :time_and_place, -> { where.not(restaurant: nil, appointment: nil) }
 
   def all_upvoted_no_downvotes
     restaurant_ids = upvoted_by_all - all_downvotes_of_group
