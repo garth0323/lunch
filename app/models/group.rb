@@ -31,19 +31,19 @@ class Group < ActiveRecord::Base
       end
       count += 1
     end
-    result
+    result.flatten
   end
 
   def all_upvotes_of_group
     result = []
     users.each { |user| result << user.favorite_restaurant_ids }
-    result.uniq
+    result.flatten.uniq
   end
 
   def all_downvotes_of_group
     result = []
     users.each { |user| result << user.veto_restaurant_ids }
-    result.uniq
+    result.flatten.uniq
   end
 
 end
