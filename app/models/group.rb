@@ -25,13 +25,16 @@ class Group < ActiveRecord::Base
     count = 0
     users.each do |user|
       if count == 0
+        byebug
         result << user.favorite_restaurant_ids
       else
-        result.flatten & user.favorite_restaurant_ids
+        byebug
+        result = result.flatten & user.favorite_restaurant_ids
       end
       count += 1
     end
-    result.flatten
+    byebug
+    result
   end
 
   def all_upvotes_of_group
