@@ -17,11 +17,13 @@ class User < ActiveRecord::Base
   def favorite_restaurant_ids
     ids = []
     up_votes.each { |v|  ids << v.restaurant.id }
+    ids
   end
 
   def veto_restaurant_ids
     ids = []
     down_votes.each { |v|  ids << v.restaurant.id }
+    ids
   end
   
 end
