@@ -6,7 +6,7 @@
         <%= link_to downvote_restaurant_path(@restaurant), method: :post, remote: true, class: "right" do %>
            <i class="material-icons red-text">thumb_down</i>
         <% end %>
-        <span class='right'>Rating: <%= total_votes(@restaurant) %></span>
+        <span class='right total-votes'>Rating: <%= total_votes(@restaurant) %></span>
         <%= link_to upvote_restaurant_path(@restaurant), method: :post, remote: true, class: "right" do %>
            <i class="material-icons red-text">thumb_up</i>
         <% end %>
@@ -20,7 +20,7 @@
   </li>
   <% if @reviews.present? %>
     <% @reviews.each do |review| %>
-      <li class="collection-item">
+      <li class="collection-item reviews">
         <%= review.content %><br/>
         <%= "By: #{review.user.username}, #{distance_of_time_in_words(review.created_at, Time.now)} ago" %>
       </li>

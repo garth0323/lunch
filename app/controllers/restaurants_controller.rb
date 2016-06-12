@@ -27,7 +27,7 @@ class RestaurantsController < ApplicationController
     if @restaurant.save!
       redirect_via_turbolinks_to restaurant_path(@restaurant)
     else
-      render :new
+      render :new 
     end
   end
 
@@ -75,5 +75,6 @@ class RestaurantsController < ApplicationController
   def find_restaurant
     @restaurant = Restaurant.find params[:id]
   end
+
 
 end
