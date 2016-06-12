@@ -25,15 +25,12 @@ class Group < ActiveRecord::Base
     count = 0
     users.each do |user|
       if count == 0
-        byebug
         result << user.favorite_restaurant_ids
       else
-        byebug
         result = result.flatten & user.favorite_restaurant_ids
       end
       count += 1
     end
-    byebug
     result
   end
 
