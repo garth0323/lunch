@@ -39,15 +39,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
 
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => Rails.application.secrets.sendgrid_username,
-    :password       => Rails.application.secrets.sendgrid_password,
-    :domain         => 'heroku.com',
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { :api_token => ENV["POSTMARK_API"] }
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

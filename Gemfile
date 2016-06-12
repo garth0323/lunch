@@ -18,6 +18,7 @@ gem 'faker'
 gem "gritter", "1.2.0"
 gem 'kaminari'
 gem 'local_time'
+gem 'postmark-rails', '~> 0.12.0'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-jt.timepicker'
@@ -27,6 +28,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -39,5 +41,5 @@ end
 
 gem 'rails_12factor', group: :production
 
-ruby "2.3.1"
+
 

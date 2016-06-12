@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     restaurants_path
   end
 
+  def after_sign_out_path_for(resource)
+    root_path
+  end
+
   protected
 
   def configure_permitted_parameters

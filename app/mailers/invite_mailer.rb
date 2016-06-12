@@ -1,6 +1,6 @@
 class InviteMailer < ApplicationMailer
-  default from: "invite@coolkidstable.com"
-
+  default from: "garth@elbowroomstudios.com"
+  
   def invite_email(user, group)
     @user = user
     @group = group
