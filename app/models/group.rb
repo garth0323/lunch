@@ -1,5 +1,5 @@
 class Group < ActiveRecord::Base
-  has_many :memberships
+  has_many :memberships, :dependent => :destroy
   has_many :users, -> { uniq }, through: :memberships
   belongs_to :restaurant
 
@@ -25,9 +25,9 @@ class Group < ActiveRecord::Base
     count = 0
     users.each do |user|
       if count == 0
-        result << user.up_votes.pluck(:id)
+        result << user.favorite_restaurant_ids
       else
-        result && user.up_votes.pluck(:id)
+        result && user.favorite_restaurant_ids
       end
       count += 1
     end
@@ -36,17 +36,13 @@ class Group < ActiveRecord::Base
 
   def all_upvotes_of_group
     result = []
-    users.each do |user|
-      result << user.up_votes.pluck(:id)
-    end
+    users.each { |user| result << user.favorite_restaurant_ids }
     result.uniq
   end
 
   def all_downvotes_of_group
     result = []
-    users.each do |user|
-      result << user.down_votes.pluck(:id)
-    end
+    users.each { |user| result << user.veto_restaurant_ids }
     result.uniq
   end
 

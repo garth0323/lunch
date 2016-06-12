@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  has_many :reviews
-  has_many :votes
-  has_many :up_votes
-  has_many :down_votes
-  has_many :memberships
+  has_many :reviews, :dependent => :destroy
+  has_many :votes, :dependent => :destroy
+  has_many :up_votes, :dependent => :destroy
+  has_many :down_votes, :dependent => :destroy
+  has_many :memberships, :dependent => :destroy
   has_many :groups, -> { uniq }, through: :memberships
 
   # Include default devise modules. Others available are:
@@ -12,5 +12,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :username, presence: true
+
+
+  def favorite_restaurant_ids
+    ids = []
+    up_votes.each { |v|  ids << v.restaurant.id }
+  end
+
+  def veto_restaurant_ids
+    ids = []
+    down_votes.each { |v|  ids << v.restaurant.id }
+  end
   
 end

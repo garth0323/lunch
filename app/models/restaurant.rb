@@ -1,9 +1,8 @@
 class Restaurant < ActiveRecord::Base
-  has_many :reviews
-  has_many :votes
-  has_many :up_votes
-  has_many :down_votes
-  has_many :suggestions
+  has_many :reviews, :dependent => :destroy
+  has_many :votes, :dependent => :destroy
+  has_many :up_votes, :dependent => :destroy
+  has_many :down_votes, :dependent => :destroy
   has_many :groups
 
   validates :name, presence: true, uniqueness: true
