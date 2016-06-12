@@ -29,6 +29,9 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'dotenv-rails'
+  gem 'rspec'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'capybara'
 end
 
 group :development do
@@ -41,5 +44,5 @@ end
 
 gem 'rails_12factor', group: :production
 
-
+ruby '2.2.3'
 
