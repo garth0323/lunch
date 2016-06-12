@@ -27,7 +27,7 @@ class Group < ActiveRecord::Base
       if count == 0
         result << user.favorite_restaurant_ids
       else
-        result && user.favorite_restaurant_ids
+        result.flatten & user.favorite_restaurant_ids
       end
       count += 1
     end
